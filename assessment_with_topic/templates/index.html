@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+        .text-field {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            margin: 10px;
+        }
+        .button:disabled {
+            background-color: #ccc;
+        }
+        .audio-player {
+            margin-top: 20px;
+        }
+        .results {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .results h3 {
+            margin-bottom: 10px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .phoneme-details {
+            margin-top: 20px;
+            display: none;
+            overflow-y: auto;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            background-color: #88f687;
+            padding: 10px;
+        }
+        .phoneme-table th, .phoneme-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Speech Assessment</h1>
+        <div style="margin-bottom: 20px;">
+            <textarea id="topic-area" class="text-field" readonly style="width: 80%; height: 40px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Click 'Change Topic' to begin</textarea>
+            <button id="change-topic-btn" onclick="changeTopic()">Change Topic</button>
+        </div>
+        <textarea id="transcript" class="text-field" placeholder="Transcript will appear here..." readonly></textarea>
+        <div>
+            <button id="controlButton" class="button">Start Recording</button>
+            <button id="learnPronunciationButton" class="button" style="display: none;">Learn Pronunciation</button>
+        </div>
+        <div class="audio-player">
+            <audio id="audioPlayer" controls></audio>
+        </div>
+        <div class="results">
+            <h3>Assessment Scores</h3>
+            <div class="table-container">
+                <table id="scoresTable">
+                    <thead>
+                        <tr>
+                            <th>Accuracy</th>
+                            <th>Completeness</th>
+                            <th>Fluency</th>
+                            <th>Prosody</th>
+                            <th>Pronunciation</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="phoneme-details">
+                <table id="phonemeTable" class="phoneme-table"></table>
+            </div>
+            <button id="phonemeButton" class="button" style="display: none;">Pronunciation Report</button>
+        </div>
+        <div class="ielts-score" style="margin-top: 20px; text-align: center; color: #974110; font-size: 24px; font-weight: bold;">
+            <span id="ieltsBand">IELTS Band Score: </span>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+
+</body>
+</html>
